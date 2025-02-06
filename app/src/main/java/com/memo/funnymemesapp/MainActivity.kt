@@ -20,6 +20,7 @@ import com.memo.funnymemesapp.screens.MainScreen
 import com.memo.funnymemesapp.utils.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okio.IOException
 import retrofit2.HttpException
 
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
                         return@launch
                     }
                     if (response.isSuccessful && response.body() != null) {
-                        with(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
                             memesList = response.body()!!.data.memes
                         }
                     }
@@ -64,7 +65,10 @@ class MainActivity : ComponentActivity() {
                 startDestination = "Main Screen"
             ) {
                 composable("Main Screen") {
-                    MainScreen(memesList = memesList , navController = navController)
+                    MainScreen(
+                        memesList = memesList,
+                        navController = navController
+                    )
                 }
                 composable("Detail Screen") {
                     DetailScreen()
