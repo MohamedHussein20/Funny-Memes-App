@@ -81,7 +81,7 @@ fun MemeItem(
             .wrapContentSize()
             .padding(10.dp)
             .clickable {
-                navController.navigate("Detail Screen")
+                navController.navigate("Detail Screen?name=$itemName&url=$itemUrl")
             },
         colors = CardDefaults.cardColors(
             containerColor = Color(0xffffc107)
